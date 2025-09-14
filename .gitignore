@@ -9,3 +9,6 @@
 
 # Allow dev container configuration.
 !/.devcontainer/
+
+# Allow feature scripts.
+!/features/
