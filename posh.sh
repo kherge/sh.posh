@@ -42,8 +42,6 @@ posh()
                 fi ;;
 
             error)
-                shift
-
                 if [ "${POSH_DEBUG:-0}" -eq 1 ]; then
                     echo '[ERROR] posh:' "$@" >&2
                 else
