@@ -14,7 +14,7 @@ export POSH_DIR="$PWD"
 . ./posh.sh && __posh_init
 
 # Run the desired command.
-posh "$@"
+"$@"
 
 # Preserve exit status.
 exit $?
