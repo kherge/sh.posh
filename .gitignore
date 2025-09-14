@@ -12,3 +12,6 @@
 
 # Allow feature scripts.
 !/features/
+
+# Allow test scripts.
+!/test/
