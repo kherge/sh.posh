@@ -4,5 +4,8 @@
 # Allow ignore lists.
 !.gitignore
 
+# Allow the main shell script.
+!/posh.sh
+
 # Allow dev container configuration.
 !/.devcontainer/
