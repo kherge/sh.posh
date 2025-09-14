@@ -1,0 +1,15 @@
+{
+	"name": "Debian",
+	"image": "mcr.microsoft.com/devcontainers/base:bullseye",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"timonwong.shellcheck"
+			],
+			"settings": {
+				"files.trimTrailingWhitespace": true,
+				"shellcheck.customArgs": ["-x"]
+			}
+		}
+	}
+}

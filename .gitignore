@@ -3,3 +3,6 @@
 
 # Allow ignore lists.
 !.gitignore
+
+# Allow dev container configuration.
+!/.devcontainer/
