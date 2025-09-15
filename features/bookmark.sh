@@ -250,5 +250,10 @@ __posh_feature_bookmark_on()
         return 0
     fi
 
+    # Initialize the feature.
+    if ! __posh_feature_bookmark_init; then
+        return 1
+    fi
+
     __posh_on bookmark
 }
