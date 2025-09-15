@@ -342,72 +342,59 @@ posh()
     # Reset indent level.
     __posh_log /
 
-    # Managing a feature?
-    if [ "$1" = 'feature' ]; then
-
-        # Make sure we have a feature name.
-        if [ "$2" = '' ]; then
-            __posh_error . "feature name required"
-
-            return 1
-        fi
-
-        local FEATURE="$2"; shift 2
-
-        # Handle invocation of required command.
-        local FUNCTION="__posh_feature_${FEATURE}"
-
-        case "$1" in
-            help|off|on)
-                FUNCTION="${FUNCTION}_${1}"
-                shift ;;
-        esac
-
-        # Invoke the function.
-        __posh_debug + "invoking: $FUNCTION"
-
-        if __posh_load "$FEATURE"; then
-            if type "$FUNCTION" > /dev/null; then
-                "$FUNCTION" "$@"
-
-                local STATUS=$?
-
-                __posh_debug -
-
-                return $STATUS
-            else
-                __posh_error . "$FEATURE: invalid command"
-                __posh_debug - "function does not exist: $FEATURE_FUNCTION"
-
-                return 1
-            fi
-        fi
-
-        return $?
-    fi
-
-    # By default, display a help screen.
-    cat << HELP >&2
-Usage: posh [COMMAND]
+    # Make sure we have a feature name.
+    if [ "$1" = '' ]; then
+        cat << HELP >&2
+Usage: posh [FEATURE]
 Manages shell customization features.
 
-COMMAND
-
-    feature  Manages the configuration settings for a feature.
-
-FEATURES
+FEATURE
 
     The following features are available:
 
 HELP
 
-    find "$__POSH_FEATURES" -type f -name '*.sh' | sort | while read -r FEATURE; do
-        FEATURE="$(basename "$FEATURE" .sh)"
+        find "$__POSH_FEATURES" -type f -name '*.sh' | sort | while read -r FEATURE; do
+            FEATURE="$(basename "$FEATURE" .sh)"
 
-        echo "        $FEATURE" >&2
-    done
+            echo "        $FEATURE" >&2
+        done
 
-    echo >&2
+        echo >&2
 
-    return 3
+        return 3
+    fi
+
+    local FEATURE="$1"; shift 1
+
+    # Handle invocation of required command.
+    local FUNCTION="__posh_feature_${FEATURE}"
+
+    case "$1" in
+        help|off|on)
+            FUNCTION="${FUNCTION}_${1}"
+            shift ;;
+    esac
+
+    # Invoke the function.
+    __posh_debug + "invoking: $FUNCTION"
+
+    if __posh_load "$FEATURE"; then
+        if type "$FUNCTION" > /dev/null; then
+            "$FUNCTION" "$@"
+
+            local STATUS=$?
+
+            __posh_debug -
+
+            return $STATUS
+        else
+            __posh_error . "$FEATURE: invalid command"
+            __posh_debug - "function does not exist: $FEATURE_FUNCTION"
+
+            return 1
+        fi
+    fi
+
+    return $?
 }
