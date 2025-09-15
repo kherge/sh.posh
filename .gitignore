@@ -4,6 +4,9 @@
 # Allow ignore lists.
 !.gitignore
 
+# Allow the README.
+!/README.md
+
 # Allow the main shell script.
 !/posh.sh
 
