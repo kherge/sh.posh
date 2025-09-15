@@ -186,7 +186,7 @@ EOF
         elif [ "$2" = '' ]; then
 
             # Make sure the book mark exists.
-            BOOKMARK="$(echo "$BOOKMARKS" | grep "^$1")"
+            BOOKMARK="$(echo "$BOOKMARKS" | grep "^$1|")"
 
             if [ -z "$BOOKMARK" ]; then
                 __posh_error . "bookmark: no such alias"
@@ -207,7 +207,7 @@ EOF
         else
 
             # Remove it if defined.
-            BOOKMARKS="$(echo "$BOOKMARKS" | grep -v "^$1")"
+            BOOKMARKS="$(echo "$BOOKMARKS" | grep -v "^$1|")"
 
             # Are we setting an alias?
             if [ "$2" != '-' ]; then
