@@ -143,7 +143,7 @@ __posh_feature_bookmark_init()
         local BOOKMARK=
         local BOOKMARKS=
 
-        if ! BOOKMARKS="$(__posh_get bookmark paths)"; then
+        if ! BOOKMARKS="$(__posh_get bookmark paths | awk 'NF')"; then
             __posh_error . "bookmark: unable to get bookmarks"
 
             return 1
@@ -162,6 +162,7 @@ __posh_feature_bookmark_init()
             # Find the length of the longest alias.
             local LONGEST=5
 
+            # shellcheck disable=SC2155
             while read -r BOOKMARK; do
                 local LENGTH="$(echo "$BOOKMARK" | cut -d\| -f1)"
                       LENGTH="$(expr "$LENGTH" : '.*')"
@@ -174,6 +175,7 @@ $BOOKMARKS
 EOF
 
             # Print the available bookmarks.
+            # shellcheck disable=SC2155
             echo "$BOOKMARKS" | while read -r BOOKMARK; do
                 local ALIAS="$(echo "$BOOKMARK" | cut -d\| -f1)"
                 local LOCATION="$(echo "$BOOKMARK" | cut -d\| -f2)"
@@ -198,6 +200,7 @@ EOF
             local LOCATION=
 
             if LOCATION="$(eval "echo \"$(echo "$BOOKMARK" | cut -d\| -f2)\"")"; then
+                # shellcheck disable=SC2164
                 cd "$LOCATION"
             fi
 
@@ -207,11 +210,11 @@ EOF
         else
 
             # Remove it if defined.
-            BOOKMARKS="$(echo "$BOOKMARKS" | grep -v "^$1|")"
+            BOOKMARKS="$(printf "%s" "$BOOKMARKS" | grep -v "^$1|")"
 
             # Are we setting an alias?
             if [ "$2" != '-' ]; then
-                BOOKMARKS="$(printf "%s|%s\n%s\n" "$1" "$2" "$BOOKMARKS" | sort)"
+                BOOKMARKS="$(printf "%s|%s\n%s" "$1" "$2" "$BOOKMARKS" | sort)"
             fi
 
             # Save the changes.
