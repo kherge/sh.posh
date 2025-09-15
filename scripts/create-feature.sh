@@ -24,20 +24,20 @@ cat - << FEATURE > "features/$FEATURE.sh"
 
 # shellcheck disable=SC3043
 
-# @description TODO
+# @description Displays a help message if the feature is enabled.
 #
-# Delete this if not needed.
+# @stderr The error message if the feature is not enabled.
+# @stdout The help message if the feature is enabled.
 #
-# @arg \$1 TODO
-#
-# @stderr TODO
-# @stdout STODO
-#
-# @exitcode 0 TODO
-# @exitcode 1 TODO
+# @exitcode 0 If the feature is enabled.
+# @exitcode 1 If the feature is not enabled.
 __posh_feature_${FEATURE}()
 {
-    :
+    if [ "\${__POSH_FEATURE_${FEATURE_UPPER}_INIT:-0}" -eq 1 ]; then
+        __posh_feature_${FEATURE}_help
+    else
+        __posh_error . "$FEATURE is not enabled"
+    fi
 }
 
 # @description Displays a help message for the feature.
