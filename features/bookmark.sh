@@ -152,6 +152,13 @@ __posh_feature_bookmark_init()
         # Was an alias not provided?
         if [ "$1" = '' ]; then
 
+            # Shortcut if there are no bookmarks.
+            if [ -z "$BOOKMARKS" ]; then
+                echo "posh: bookmark: no bookmarks available"
+
+                return 0
+            fi
+
             # Find the length of the longest alias.
             local LONGEST=5
 
@@ -166,7 +173,7 @@ __posh_feature_bookmark_init()
 $BOOKMARKS
 EOF
 
-            # Print the avaiable bookmarks.
+            # Print the available bookmarks.
             echo "$BOOKMARKS" | while read -r BOOKMARK; do
                 local ALIAS="$(echo "$BOOKMARK" | cut -d\| -f1)"
                 local LOCATION="$(echo "$BOOKMARK" | cut -d\| -f2)"
