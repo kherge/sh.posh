@@ -18,7 +18,7 @@ __posh_feature_bookmark()
 __posh_feature_bookmark_help()
 {
     cat - << HELP >&2
-Usage: posh feature bookmark [COMMAND]
+Usage: posh bookmark [COMMAND]
 Manages control over the bookmark feature.
 
 COMMAND

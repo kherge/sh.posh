@@ -68,7 +68,7 @@ __posh_feature_example()
 __posh_feature_example_help()
 {
     cat - << HELP >&2
-Usage: posh feature example [COMMAND]
+Usage: posh example [COMMAND]
 An example of how a feature can be implemented.
 
 COMMAND
