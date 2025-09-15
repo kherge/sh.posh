@@ -116,8 +116,6 @@ __posh_feature_bookmark_init()
         __posh_debug "already initialized: bookmark"
 
         return 0
-    else
-        export __POSH_FEATURE_BOOKMARK_INIT=1
     fi
 
     # Initialize the feature.
@@ -225,6 +223,9 @@ EOF
             fi
         fi
     }
+
+    # Remember activation.
+    export __POSH_FEATURE_BOOKMARK_INIT=1
 }
 
 # @description Manages the process of turning the feature off.

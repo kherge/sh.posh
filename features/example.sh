@@ -96,14 +96,15 @@ __posh_feature_example_init()
     # Only initialize if this feature has not already.
     if [ "${__POSH_EXAMPLE_INIT:-0}" -eq 1 ]; then
         return 0
-    else
-        export __POSH_EXAMPLE_INIT=1
     fi
 
     # shellcheck disable=SC2155
     export EXAMPLE_WHEN="$(date)"
 
     __posh_debug . "example is initialized"
+
+    # Remember activation.
+    export __POSH_EXAMPLE_INIT=1
 }
 
 # @description Manages the process of turning the feature off.

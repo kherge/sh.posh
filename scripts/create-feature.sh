@@ -67,12 +67,13 @@ __posh_feature_${FEATURE}_init()
         __posh_debug "already initialized: $FEATURE"
 
         return 0
-    else
-        export __POSH_FEATURE_${FEATURE_UPPER}_INIT=1
     fi
 
     # Initialize the feature.
     __posh_debug "initializing: $FEATURE"
+
+    # Remember activation.
+    export __POSH_FEATURE_${FEATURE_UPPER}_INIT=1
 }
 
 # @description Manages the process of turning the feature off.

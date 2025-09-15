@@ -64,8 +64,6 @@ __posh_feature_ls_init()
         __posh_debug "already initialized: ls"
 
         return 0
-    else
-        export __POSH_FEATURE_LS_INIT=1
     fi
 
     # Initialize the feature.
@@ -87,6 +85,9 @@ __posh_feature_ls_init()
     # Create other handy aliases.
     alias la="ll -a"
     alias lh="ll -h"
+
+    # Remember activation.
+    export __POSH_FEATURE_LS_INIT=1
 }
 
 # @description Manages the process of turning the feature off.
