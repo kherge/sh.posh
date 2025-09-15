@@ -232,6 +232,7 @@ __posh_feature_bookmark_off()
 
     # Clear the initialization flag.
     unset __POSH_FEATURE_BOOKMARK_INIT
+    unset -f b
 
     __posh_off bookmark
 }
