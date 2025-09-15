@@ -348,6 +348,12 @@ posh()
 Usage: posh [FEATURE]
 Manages shell customization features.
 
+The features below are only accessible once they have been turned on. If you
+would like to know more about a feature before turning it on, run the following
+command (using the example feature in this case):
+
+    posh example help
+
 FEATURE
 
     The following features are available:
