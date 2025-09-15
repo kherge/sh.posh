@@ -107,6 +107,11 @@ __posh_feature_${FEATURE}_on()
         return 0
     fi
 
+    # Initialize the feature.
+    if ! __posh_feature_${FEATURE}_init; then
+        return 1
+    fi
+
     __posh_on $FEATURE
 }
 
