@@ -131,7 +131,7 @@ __posh_init()
         done < "$FEATURES"
     fi
 
-    __posh_debug -
+    __posh_debug /
 
     # Self destruct.
     unset -f __posh_init
