@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# shellcheck disable=SC2155
 # shellcheck disable=SC3043
 
 # @description Displays a help message if the feature is enabled.
@@ -198,10 +199,10 @@ __posh_feature_path_init()
     __posh_debug + "initializing: path"
 
     # Set starting paths if nothing is configured.
-    local MANAGED_PATH="${XDG_CONFIG_HOME:-$HOME/.config}/posh/path/managed"
+    if [ ! -f "${XDG_CONFIG_HOME:-$HOME/.config}/posh/path/managed" ]; then
+        local STARTING_PATHS="$(echo "$PATH" | tr : "\n" | nl -n rz -w 3 -s '|')"
 
-    if [ ! -f "$MANAGED_PATH" ]; then
-        if ! echo "$PATH" | tr : "\n" | nl -n rz -w 3 -s '|' > "$MANAGED_PATH"; then
+        if ! __posh_set path managed "$STARTING_PATHS"; then
             __posh_error . "path: unable to set starting set of managed paths"
 
             return 1
