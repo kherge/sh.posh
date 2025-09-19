@@ -92,7 +92,7 @@ EOF
             # Update PATH.
             local EVALUATED=
 
-            if ! EVALUATED="$(__posh_feature_path_evaluated | tr "\n" :)"; then
+            if ! EVALUATED="$(__posh_feature_path_evaluated | tr '\n' :)"; then
                 __posh_error . "path: could not update PATH"
 
                 return 1
