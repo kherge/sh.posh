@@ -61,23 +61,23 @@ __posh_feature_ls_init()
 {
     # Make sure this feature is not initialized more than once.
     if [ "${__POSH_FEATURE_LS_INIT:-0}" -eq 1 ]; then
-        __posh_debug "already initialized: ls"
+        __posh_debug . "already initialized: ls"
 
         return 0
     fi
 
     # Initialize the feature.
-    __posh_debug "initializing: ls"
+    __posh_debug . "initializing: ls"
 
     # Are we using the BSD version?
     if ! ls --help > /dev/null 2>&1; then
-        __posh_debug "using BSD version of ls"
+        __posh_debug . "using BSD version of ls"
 
         alias ll="ls -G -l"
 
     # Are we using the GNU version?
     else
-        __posh_debug "using GNU version of ls"
+        __posh_debug . "using GNU version of ls"
 
         alias ll="ls --color=auto --group-directories-first --hide-control-chars --time-style=long-iso -l"
     fi

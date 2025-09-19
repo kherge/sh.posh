@@ -64,13 +64,13 @@ __posh_feature_${FEATURE}_init()
 {
     # Make sure this feature is not initialized more than once.
     if [ "\${__POSH_FEATURE_${FEATURE_UPPER}_INIT:-0}" -eq 1 ]; then
-        __posh_debug "already initialized: $FEATURE"
+        __posh_debug . "already initialized: $FEATURE"
 
         return 0
     fi
 
     # Initialize the feature.
-    __posh_debug "initializing: $FEATURE"
+    __posh_debug . "initializing: $FEATURE"
 
     # Remember activation.
     export __POSH_FEATURE_${FEATURE_UPPER}_INIT=1

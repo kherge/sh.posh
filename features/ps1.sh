@@ -42,13 +42,13 @@ __posh_feature_ps1_init()
 {
     # Make sure this feature is not initialized more than once.
     if [ "${__POSH_FEATURE_PS1_INIT:-0}" -eq 1 ]; then
-        __posh_debug "already initialized: ps1"
+        __posh_debug . "already initialized: ps1"
 
         return 0
     fi
 
     # Initialize the feature.
-    __posh_debug "initializing: ps1"
+    __posh_debug . "initializing: ps1"
 
     # Use a shell specific implementation of PS1.
     if [ -n "$BASH_VERSION" ]; then

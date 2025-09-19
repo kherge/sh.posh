@@ -87,7 +87,7 @@ __posh_feature_bookmark_list()
     local BOOKMARKS=
 
     if ! BOOKMARKS="$(__posh_get bookmark paths)"; then
-        __posh_error "bookmark: could not retrieve bookmarks"
+        __posh_error . "bookmark: could not retrieve bookmarks"
 
         return 1
     fi
@@ -113,13 +113,13 @@ __posh_feature_bookmark_init()
 {
     # Make sure this feature is not initialized more than once.
     if [ "${__POSH_FEATURE_BOOKMARK_INIT:-0}" -eq 1 ]; then
-        __posh_debug "already initialized: bookmark"
+        __posh_debug . "already initialized: bookmark"
 
         return 0
     fi
 
     # Initialize the feature.
-    __posh_debug "initializing: bookmark"
+    __posh_debug . "initializing: bookmark"
 
     # @description Changes directory to the specified bookmark.
     #
@@ -217,7 +217,7 @@ EOF
 
             # Save the changes.
             if ! __posh_set bookmark paths "$BOOKMARKS"; then
-                __posh_error "bookmark: unable to save bookmark"
+                __posh_error . "bookmark: unable to save bookmark"
 
                 return 1
             fi
